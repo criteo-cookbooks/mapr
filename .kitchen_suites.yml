@@ -1,0 +1,4 @@
+- name: default
+  run_list:
+    - recipe[mapr::default]
+  attributes:
