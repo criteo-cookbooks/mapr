@@ -1,4 +1,26 @@
-- name: default
+- name: master
   run_list:
-    - recipe[mapr::default]
+    - recipe[mapr::prerequisites]
+    - recipe[mapr::core]
+    - recipe[mapr::zookeeper]
+    - recipe[mapr::cldb]
+    - recipe[mapr::mcs]
+    - recipe[mapr::nfs]
+  attributes:
+
+- name: node
+  run_list:
+    - recipe[mapr::prerequisites]
+    - recipe[mapr::core]
+    - recipe[mapr::mfs]
+    - recipe[mapr::compute]
+    - recipe[mapr::nfs]
+  attributes:
+
+- name: resourcemanager
+  run_list:
+    - recipe[mapr::prerequisites]
+    - recipe[mapr::core]
+    - recipe[mapr::resourcemanager]
+    - recipe[mapr::nfs]
   attributes:

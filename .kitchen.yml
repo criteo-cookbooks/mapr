@@ -1,0 +1,16 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_zero
+
+platforms:
+- name: centos-7
+  transport:
+    name: speedy_ssh
+  driver_config:
+    box: criteo-centos-7.2-core
+
+suites:
+<%= require 'erubis'; Erubis::Eruby.new(File.read('.kitchen_suites.yml')).evaluate %>
