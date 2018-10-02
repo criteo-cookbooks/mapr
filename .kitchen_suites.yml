@@ -8,7 +8,7 @@
     - recipe[mapr::nfs]
   attributes:
 
-- name: node
+- name: storage
   run_list:
     - recipe[mapr::prerequisites]
     - recipe[mapr::core]

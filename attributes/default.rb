@@ -70,3 +70,18 @@ default['mapr']['nfs']['mount_options'] = %w[
 ### CLDB attributes ###
 
 ### MCS attributes ###
+
+### MFS attributes ###
+# Define list of disks to configure
+# Ex: %w[/dev/sdb /dev/sdc ...]
+default['mapr']['mfs']['disks'] = %w[]
+# Number of disks in a storage pool
+default['mapr']['mfs']['stripe_width'] = 3
+
+### MapR architecture ###
+default['mapr']['platform']['cldb_hosts'] = %w[]
+default['mapr']['platform']['zookeeper_hosts'] = %w[]
+
+### MapR configuration ###
+# You can add options to configure.sh script using this attribute
+default['mapr']['configuration']['configure.sh']['additional_opts'] = nil
