@@ -37,9 +37,6 @@ platforms:
   - name: centos-7
     driver:
       image_id: ami-d2c924b2
-  - name: windows-2012r2
-    driver:
-      image_id: ami-b871aad8
 
 suites:
 <%= require 'erubis'; Erubis::Eruby.new(File.read('.kitchen_suites.yml')).evaluate %>
