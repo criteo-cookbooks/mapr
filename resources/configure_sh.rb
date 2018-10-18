@@ -7,8 +7,7 @@ action :run do
   basic_opts = new_resource.basic_opts
   additional_opts = new_resource.additional_opts
 
-  basic_configuration = basic_opts || {}
-  configuration = additional_opts ? basic_configuration.merge(additional_opts) : basic_configuration
+  configuration = (basic_opts || {}).merge(additional_opts || {})
 
   return if configuration.empty?
   cmd = ::Mapr::ConfigureSh.build_command(configuration)

@@ -15,7 +15,7 @@ mapr_configure_sh 'Initialization' do
   additional_opts node['mapr']['configuration']['configure.sh']['additional_opts']
 end
 
-# This action we be called with notify when needed
+# This action will be called with notify when needed
 mapr_configure_sh 'refresh roles' do
   additional_opts('-R' => true)
   action :nothing

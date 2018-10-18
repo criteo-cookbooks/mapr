@@ -6,7 +6,7 @@ module Mapr
     MAPR_CONFIGURE_SCRIPT = '/opt/mapr/server/configure.sh'.freeze unless const_defined?(:MAPR_CONFIGURE_SCRIPT)
 
     # Build the configure.sh command depending on args Hash
-    # args Hash should in a { 'args' => value} format
+    # args Hash should in a { 'option' => value} format
     # Example : args = { '-N' => "cluster_name", '-C' => "host1,host2,host3", '-Z' => "host4,host5,host6" }
     # Options with no value are passed like { '-secure' => true }
     def build_command(args)
