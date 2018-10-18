@@ -22,7 +22,6 @@ describe 'mapr::core' do
       expect(chef_run).to install_package(%w[
                                             mapr-core
                                             mapr-core-internal
-                                            mapr-kafka
                                           ],)
     end
   end
