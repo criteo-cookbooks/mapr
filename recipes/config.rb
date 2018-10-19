@@ -17,6 +17,5 @@ end
 
 # This action will be called with notify when needed
 mapr_configure_sh 'refresh roles' do
-  additional_opts('-R' => true)
   action :nothing
 end

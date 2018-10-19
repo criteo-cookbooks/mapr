@@ -1,4 +1,5 @@
 module Mapr
+  require 'json'
   # Module for configure.sh script
   module ConfigureSh
     module_function
@@ -20,6 +21,23 @@ module Mapr
         cmd_string << " #{a} #{v}"
       end
       cmd_string
+    end
+
+    # Write the options used for the resource mapr_configure_sh[name] in JSON format
+    def store_options(name, basic_opts, add_opts)
+      opts_file = ::File.join(Chef::Config[:file_cache_path], "configure_sh_#{name}")
+      conf = { 'basic' => basic_opts,
+               'add' => add_opts }
+      ::File.write(opts_file, conf.to_json)
+    end
+
+    # Load the options used for the resource mapr_configure_sh[name] from JSON format
+    # for a specific type (add for additionnal_options and basic for basic_options)
+    # It's used in load_current_resource to easily implement idempotency with configure.sh script
+    # Returns nil if there is no file
+    def load_options(name, option_type)
+      opts_file = ::File.join(Chef::Config[:file_cache_path], "configure_sh_#{name}")
+      ::File.exist?(opts_file) ? JSON.parse(::File.read(opts_file))[option_type] : nil
     end
   end
 
