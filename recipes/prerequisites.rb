@@ -19,7 +19,9 @@ include_recipe 'mapr::repositories'
 include_recipe 'java::default'
 
 # Install required packages
-package node['mapr']['prerequisite']['packages']
+package node['mapr']['prerequisite']['packages'] do
+  action :upgrade
+end
 
 # Set specific sysctl configuration
 node['mapr']['sysctl'].each do |param_name, value|

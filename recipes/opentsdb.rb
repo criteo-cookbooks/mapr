@@ -4,4 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package 'mapr-opentsdb'
+package 'mapr-opentsdb' do
+  action :upgrade
+end

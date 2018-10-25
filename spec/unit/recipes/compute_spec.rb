@@ -19,7 +19,7 @@ describe 'mapr::compute' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs required compute packages' do
-      expect(chef_run).to install_package(%w[
+      expect(chef_run).to upgrade_package(%w[
                                             mapr-mapreduce2
                                             mapr-nodemanager
                                           ],)

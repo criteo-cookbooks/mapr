@@ -4,4 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package 'mapr-cldb'
+package 'mapr-cldb' do
+  action :upgrade
+end

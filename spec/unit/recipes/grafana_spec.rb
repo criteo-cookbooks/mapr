@@ -19,7 +19,7 @@ describe 'mapr::grafana' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr grafana package' do
-      expect(chef_run).to install_package('mapr-grafana')
+      expect(chef_run).to upgrade_package('mapr-grafana')
     end
   end
 end

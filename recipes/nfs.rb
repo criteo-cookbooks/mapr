@@ -4,7 +4,9 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package node['mapr']['nfs']['packages']
+package node['mapr']['nfs']['packages'] do
+  action :upgrade
+end
 
 # Create /mapr directory
 directory '/mapr' do

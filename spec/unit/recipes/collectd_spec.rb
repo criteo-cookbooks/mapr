@@ -19,7 +19,7 @@ describe 'mapr::collectd' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr collectd package' do
-      expect(chef_run).to install_package('mapr-collectd')
+      expect(chef_run).to upgrade_package('mapr-collectd')
     end
   end
 end

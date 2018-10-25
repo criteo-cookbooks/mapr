@@ -4,4 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package 'mapr-grafana'
+package 'mapr-grafana' do
+  action :upgrade
+end
