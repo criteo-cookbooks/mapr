@@ -19,7 +19,7 @@ describe 'mapr::resourcemanager' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr resourcemanager package' do
-      expect(chef_run).to install_package('mapr-resourcemanager')
+      expect(chef_run).to upgrade_package('mapr-resourcemanager')
     end
   end
 end

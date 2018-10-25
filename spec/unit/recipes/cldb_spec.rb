@@ -19,7 +19,7 @@ describe 'mapr::cldb' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr cldb package' do
-      expect(chef_run).to install_package('mapr-cldb')
+      expect(chef_run).to upgrade_package('mapr-cldb')
     end
   end
 end

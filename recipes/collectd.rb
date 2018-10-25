@@ -4,4 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package 'mapr-collectd'
+package 'mapr-collectd' do
+  action :upgrade
+end

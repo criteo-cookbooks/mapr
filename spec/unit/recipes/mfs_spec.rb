@@ -19,7 +19,7 @@ describe 'mapr::mfs' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr mfs package' do
-      expect(chef_run).to install_package('mapr-fileserver')
+      expect(chef_run).to upgrade_package('mapr-fileserver')
     end
   end
 end

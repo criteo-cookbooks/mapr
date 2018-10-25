@@ -12,4 +12,6 @@ directory node['mapr']['zookeeper']['datadir'] do
   recursive true
 end
 
-package 'mapr-zookeeper'
+package 'mapr-zookeeper' do
+  action :upgrade
+end

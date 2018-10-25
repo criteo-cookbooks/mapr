@@ -19,7 +19,7 @@ describe 'mapr::core' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr core package' do
-      expect(chef_run).to install_package(%w[
+      expect(chef_run).to upgrade_package(%w[
                                             mapr-core
                                             mapr-core-internal
                                           ],)

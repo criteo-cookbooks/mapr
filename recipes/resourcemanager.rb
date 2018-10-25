@@ -4,4 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-package 'mapr-resourcemanager'
+package 'mapr-resourcemanager' do
+  action :upgrade
+end

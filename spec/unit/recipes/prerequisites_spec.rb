@@ -26,7 +26,7 @@ describe 'mapr::prerequisites' do
     end
 
     it 'installs mapr cldb package' do
-      expect(chef_run).to install_package(%w[
+      expect(chef_run).to upgrade_package(%w[
                                             MySQL-python
                                           ],)
     end

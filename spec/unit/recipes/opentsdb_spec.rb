@@ -19,7 +19,7 @@ describe 'mapr::opentsdb' do
       expect { chef_run }.to_not raise_error
     end
     it 'installs mapr opentsdb package' do
-      expect(chef_run).to install_package('mapr-opentsdb')
+      expect(chef_run).to upgrade_package('mapr-opentsdb')
     end
   end
 end

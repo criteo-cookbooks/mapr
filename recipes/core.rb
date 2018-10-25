@@ -5,4 +5,6 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 # Install mapr-core
-package node['mapr']['core']['packages']
+package node['mapr']['core']['packages'] do
+  action :upgrade
+end

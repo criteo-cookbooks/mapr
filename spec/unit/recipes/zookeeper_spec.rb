@@ -23,7 +23,7 @@ describe 'mapr::zookeeper' do
       expect(chef_run).to create_directory('/opt/mapr/zkdata')
     end
     it 'installs mapr zookeeper package' do
-      expect(chef_run).to install_package('mapr-zookeeper')
+      expect(chef_run).to upgrade_package('mapr-zookeeper')
     end
   end
 end
