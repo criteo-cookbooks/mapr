@@ -45,7 +45,6 @@ default['mapr']['sysctl']['vm.overcommit_memory'] = 0
 default['mapr']['core']['packages'] = %w[
   mapr-core
   mapr-core-internal
-  mapr-kafka
 ]
 
 ### Zookeeper Attributes ###
