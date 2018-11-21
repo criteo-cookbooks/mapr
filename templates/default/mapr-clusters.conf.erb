@@ -1,0 +1,1 @@
+<%= @config['name']%> <%@config['security'].each do |key,value|%> <% unless value.nil? or value.to_s.empty? %><%=key %>=<%=value %><% end %><%end %> <%= @config['cldbs'] %>

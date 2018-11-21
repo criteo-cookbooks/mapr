@@ -20,7 +20,7 @@ action :run do
     stripe_width = new_resource.stripe_width
 
     # Create tmpfile containing disks list
-    diskfile = ::File.join('/tmp/', "disksetup_#{name.gsub(/ /,'_')}.txt")
+    diskfile = ::File.join('/tmp/', "disksetup_#{name.gsub(/ /, '_')}.txt")
     file diskfile do
       content disks.join("\n")
     end

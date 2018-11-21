@@ -1,46 +1,5 @@
 module Mapr
   require 'json'
-  # Module for configure.sh script
-  module ConfigureSh
-    module_function
-
-    MAPR_CONFIGURE_SCRIPT = '/opt/mapr/server/configure.sh'.freeze unless const_defined?(:MAPR_CONFIGURE_SCRIPT)
-
-    # Build the configure.sh command depending on args Hash
-    # args Hash should in a { 'option' => value} format
-    # Example : args = { '-N' => "cluster_name", '-C' => "host1,host2,host3", '-Z' => "host4,host5,host6" }
-    # Options with no value are passed like { '-secure' => true }
-    def build_command(args)
-      cmd_string = MAPR_CONFIGURE_SCRIPT.dup
-      args.sort.each do |a, v|
-        # non-value options
-        if v == true
-          cmd_string << " #{a}"
-          next
-        end
-        cmd_string << " #{a} #{v}"
-      end
-      cmd_string
-    end
-
-    # Write the options used for the resource mapr_configure_sh[name] in JSON format
-    def store_options(name, basic_opts, add_opts)
-      opts_file = ::File.join(Chef::Config[:file_cache_path], "configure_sh_#{name}")
-      conf = { 'basic' => basic_opts,
-               'add' => add_opts }
-      ::File.write(opts_file, conf.to_json)
-    end
-
-    # Load the options used for the resource mapr_configure_sh[name] from JSON format
-    # for a specific type (add for additionnal_options and basic for basic_options)
-    # It's used in load_current_resource to easily implement idempotency with configure.sh script
-    # Returns nil if there is no file
-    def load_options(name, option_type)
-      opts_file = ::File.join(Chef::Config[:file_cache_path], "configure_sh_#{name}")
-      ::File.exist?(opts_file) ? JSON.parse(::File.read(opts_file))[option_type] : nil
-    end
-  end
-
   module DiskSetup
     module_function
 
@@ -67,6 +26,91 @@ module Mapr
         opts.delete('-W')
       end
       cmd_string << " #{opts.join(' ')}" << " #{disks_file}"
+    end
+  end
+
+  class AttributeMerger < Hash
+    "" " Merge two arrays if a predicate is true " ""
+
+    def merge(predicate, h1, force = false)
+      raise "the predicate should be of type: boolean, not: #{predicate.class.name}" unless predicate == !!predicate
+      super.merge(h1) if predicate && !force
+      super.merge!(h1) if predicate && force
+    end
+  end
+
+  class NodeType
+    "
+    Deduct the node type from it's components
+"
+    @@components = Chef.node['mapr']['cluster']['components']
+    class << self
+      def empty?
+        return @@components.nil? || @@components.empty?
+      end
+
+      def resourcemanager?
+        include_services?('resourcemanager')
+      end
+
+      def storage?
+        include_services?('storage')
+      end
+
+      def compute?
+        include_services?('compute')
+      end
+
+      def cldb?
+        include_services?('cldb')
+      end
+
+      def zookeeper?
+        include_services?('zookeeper')
+      end
+
+      def mcs?
+        include_services?('mcs')
+      end
+
+      def nfs?
+        include_services?('nfs')
+      end
+
+      def grafana?
+        include_services?('grafana')
+      end
+
+      def hs?
+        include_services?('hs')
+      end
+
+
+      def mg?
+        include_services?('mg')
+      end
+
+      private
+
+      def include_services?(*elements)
+        return false if empty?
+        elements.map {|service| @@components.include?(service)}.all?
+      end
+    end
+  end
+
+  class KerberosUtil
+    class << self
+      def keytab_valid?(_keytab_path)
+        cmd = ['k5start', '-U', '-f', new_resource.keytab, '--', 'kinit']
+        executor Mixlib::ShellOut.new(*cmd)
+        result = executor.run_command
+        if executor.error?
+          false
+        else
+          true
+        end
+      end
     end
   end
 end

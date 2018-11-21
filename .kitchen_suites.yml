@@ -1,26 +1,41 @@
+# TODO: Test components independently
 - name: master
   run_list:
-    - recipe[mapr::prerequisites]
-    - recipe[mapr::core]
-    - recipe[mapr::zookeeper]
-    - recipe[mapr::cldb]
-    - recipe[mapr::mcs]
-    - recipe[mapr::nfs]
+  - recipe[mapr::kitchen_helper]
+  - recipe[mapr::smart_install]
+  verifier:
+    inspect-test: test/integration/master
   attributes:
+    mapr:
+      config:
+        mode: 0444 # Due to bug in KITCHEN-EC2 we can't change the username with which we are connecting, so to see if
+        # do actually create anything, we need to enlarge the permissions of the configuration file
+        # Ref: https://github.com/test-kitchen/kitchen-ec2/issues/225
+      cluster:
+        components:
+        - cldb
+        - mcs
+        - zookeeper
 
-- name: storage
+- name: master-with-kerberos
   run_list:
-    - recipe[mapr::prerequisites]
-    - recipe[mapr::core]
-    - recipe[mapr::mfs]
-    - recipe[mapr::compute]
-    - recipe[mapr::nfs]
+  - recipe[mapr::kitchen_helper]
+  - recipe[mapr::smart_install]
+  verifier:
+    inspect-test: test/integration/master-with-kerberos
   attributes:
-
-- name: resourcemanager
-  run_list:
-    - recipe[mapr::prerequisites]
-    - recipe[mapr::core]
-    - recipe[mapr::resourcemanager]
-    - recipe[mapr::nfs]
-  attributes:
+    mapr:
+      config:
+        mode: 0444 # Due to bug in KITCHEN-EC2 we can't change the username with which we are connecting, so to see if
+        # do actually create anything, we need to enlarge the permissions of the configuration file
+        # Ref: https://github.com/test-kitchen/kitchen-ec2/issues/225
+      cluster:
+        components:
+        - cldb
+        - mcs
+        - zookeeper
+        config:
+          security:
+            secure: true
+            kerberosEnable: true
+            cldbPrincipal: mapr/mapr.cluster.com
