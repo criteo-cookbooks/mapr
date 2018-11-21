@@ -33,5 +33,13 @@ describe 'mapr::nfs' do
       expect(chef_run).to render_file('/opt/mapr/conf/mapr_fstab')
         .with_content('nolock,nfsvers=3')
     end
+
+    it 'should include the recipe mapr::config' do
+      expect(chef_run).to include_recipe('mapr::config')
+    end
+
+    it 'should include the recipe default' do
+      expect(chef_run).to include_recipe('mapr')
+    end
   end
 end

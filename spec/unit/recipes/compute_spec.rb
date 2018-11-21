@@ -24,5 +24,12 @@ describe 'mapr::compute' do
                                             mapr-nodemanager
                                           ],)
     end
+    it 'should include the mapr::config recipe' do
+      expect(chef_run).to include_recipe('mapr::config')
+    end
+
+    it 'should include the default recipe' do
+      expect(chef_run).to include_recipe('mapr')
+    end
   end
 end

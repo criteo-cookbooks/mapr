@@ -21,5 +21,20 @@ describe 'mapr::mfs' do
     it 'installs mapr mfs package' do
       expect(chef_run).to upgrade_package('mapr-fileserver')
     end
+    it 'should include the recipe mapr::config' do
+      expect(chef_run).to include_recipe('mapr::config')
+    end
+
+    it 'should include the recipe default' do
+      expect(chef_run).to include_recipe('mapr')
+    end
+
+    it 'should include the disks recipe' do
+      expect(chef_run).to include_recipe('mapr::disks')
+    end
+
+    it 'should include the hadoop recipe' do
+      expect(chef_run).to include_recipe('mapr::hadoop')
+    end
   end
 end

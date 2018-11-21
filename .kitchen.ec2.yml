@@ -34,9 +34,13 @@ transport:
   ssh_key: <%= ENV['HOME'] %>/.ssh/id_rsa
 
 platforms:
-  - name: centos-7
+  - name: criteo
     driver:
       image_id: ami-d2c924b2
+
+verifier:
+  name: inspec
+  sudo: true
 
 suites:
 <%= require 'erubis'; Erubis::Eruby.new(File.read('.kitchen_suites.yml')).evaluate %>

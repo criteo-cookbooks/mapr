@@ -21,5 +21,9 @@ describe 'mapr::resourcemanager' do
     it 'installs mapr resourcemanager package' do
       expect(chef_run).to upgrade_package('mapr-resourcemanager')
     end
+
+    it 'should include the recipe default' do
+      expect(chef_run).to include_recipe('mapr')
+    end
   end
 end

@@ -1,21 +1,35 @@
-#
 # Cookbook Name:: mapr
-# Recipe:: config
+# Spec:: config
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+#
+#
+# Usage:
+#   - Used for common configuration for all the component of MaprCluster
 
-mapr_configure_sh 'Initialization' do
-  basic_opts(
-    '-N' => node['mapr']['cluster_name'],
-    '-u' => node['mapr']['user'],
-    '-g' => node['mapr']['group'],
-    '-C' => node['mapr']['platform']['cldb_hosts'].join(','),
-    '-Z' => node['mapr']['platform']['zookeeper_hosts'].join(','),
-  )
-  additional_opts node['mapr']['configuration']['configure.sh']['additional_opts']
+# TODO: The code is not clearly readable
+_config = Mapr::AttributeMerger.new node['mapr']['cluster']['config']
+_config.merge true, cldb: node['mapr']['cluster']['nodes']['cldb']
+  .product([node['mapr']['cldb']['config']['cldb.port'].to_s])
+  .map { |host, port| host + ':' + port }
+  .join(' ')
+
+### Generate the mapr-clusters.conf
+template File.join(node['mapr']['config']['config_dir'], 'mapr-clusters.conf') do
+  source 'mapr-clusters.conf.erb'
+  variables(config: _config)
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  mode node['mapr']['config']['mode']
 end
 
-# This action will be called with notify when needed
-mapr_configure_sh 'refresh roles' do
-  action :nothing
+# Generated for security purpose, otherwise the default one is left untacted
+template File.join(node['mapr']['config']['config_dir'], 'mapr.login.conf') do
+  source 'mapr.login.conf.erb'
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  variables(mapr_principal:   "mapr/#{node['mapr']['cluster']['config']['name']}",
+            keytab_path:      File.join(node['mapr']['config']['config_dir'], 'mapr.keytab'),
+            spnego_principal: "HTTP/#{node['fqdn']}",)
 end
+include_recipe 'mapr::security' if node['mapr']['cluster']['config']['security']['secure']
