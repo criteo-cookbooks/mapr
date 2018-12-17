@@ -42,7 +42,7 @@ describe 'mapr::cldb' do
             'cldb.zookeeper.servers' => 'zk1:5181,zk2:5181,zk3:5181',
             'enable.replicas.invariant.check' => false,
             'hadoop.version' => '2.7.0',
-            'net.topology.script.file.name' => '/home/mapr/topo.pl',
+            'net.topology.table.file.name' => '/home/mapr/topo.pl',
             'num.volmirror.threads' => 1,
           },
         )

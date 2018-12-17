@@ -14,7 +14,7 @@
 
 # Generating the cldb.key
 # The key is only generated on cldb and zookeeper machines
-if ['mapr::cldb', 'mapr::zookeeper'].map { |recipe| node.recipe?(recipe) }.any?
+if (Mapr::NodeType.cldb? or Mapr::NodeType.zookeeper?) and node['mapr']['cluster']['config']['security']['secure']
   file File.join(node['mapr']['config']['config_dir'], 'cldb.key') do
     content node['mapr']['security']['cldb.key']['content']
     owner node['mapr']['config']['owner']
@@ -36,8 +36,18 @@ end
 template File.join(node['mapr']['config']['config_dir'], 'maprserverticket') do
   source 'maprserverticket.erb'
   variables(cluster_name: node['mapr']['cluster']['config']['name'],
-            secret:       node['mapr']['security']['maprserverticket']['content'],)
+            secret: node['mapr']['security']['maprserverticket']['content'],)
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']
+end
+
+node['mapr']['security']['jmx']['config'].each do |type, config|
+  template File.join(node['mapr']['config']['config_dir'], "jmxremote.#{type}") do
+    source 'jmxremote.erb'
+    variables(config: config)
+    owner node['mapr']['config']['owner']
+    group node['mapr']['config']['group']
+    mode node['mapr']['config']['mode']
+  end
 end

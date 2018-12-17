@@ -1,0 +1,5 @@
+<% @config.each do |key, value| %>
+  <% unless value.nil? or value.empty? %>
+<%= key %>  <%= value %>
+  <% end %>
+<% end %>

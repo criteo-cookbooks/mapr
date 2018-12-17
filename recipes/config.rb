@@ -9,15 +9,16 @@
 
 # TODO: The code is not clearly readable
 _config = Mapr::AttributeMerger.new node['mapr']['cluster']['config']
-_config.merge true, cldb: node['mapr']['cluster']['nodes']['cldb']
-  .product([node['mapr']['cldb']['config']['cldb.port'].to_s])
-  .map { |host, port| host + ':' + port }
-  .join(' ')
+Chef::Log.info(_config)
+_config.merge true, {cldbs: node['mapr']['cluster']['nodes']['cldb']
+                               .product([node['mapr']['cldb']['config']['cldb.port'].to_s])
+                               .map {|host, port| host + ':' + port}
+                               .join(' ')}
 
 ### Generate the mapr-clusters.conf
 template File.join(node['mapr']['config']['config_dir'], 'mapr-clusters.conf') do
   source 'mapr-clusters.conf.erb'
-  variables(config: _config)
+  variables(config: _config.hash)
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']
@@ -28,8 +29,9 @@ template File.join(node['mapr']['config']['config_dir'], 'mapr.login.conf') do
   source 'mapr.login.conf.erb'
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
-  variables(mapr_principal:   "mapr/#{node['mapr']['cluster']['config']['name']}",
-            keytab_path:      File.join(node['mapr']['config']['config_dir'], 'mapr.keytab'),
-            spnego_principal: "HTTP/#{node['fqdn']}",)
+  variables(mapr_principal: "mapr/#{node['mapr']['cluster']['config']['name']}",
+            mapr_keytab: File.join(node['mapr']['config']['config_dir'], 'mapr.keytab'),
+            spnego_principal: "HTTP/#{node['fqdn']}",
+            spnego_keytab: File.join(node['mapr']['config']['config_dir'], 'spnego.keytab'))
 end
 include_recipe 'mapr::security' if node['mapr']['cluster']['config']['security']['secure']

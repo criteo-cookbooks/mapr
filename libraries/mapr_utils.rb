@@ -29,15 +29,17 @@ module Mapr
     end
   end
 
-  class AttributeMerger < Hash
+  class AttributeMerger
     "" " Merge two arrays if a predicate is true " ""
+    attr_reader :hash
+    def initialize(hash)
+      @hash = hash
+    end
 
     def merge(predicate, h1, _force = false)
       raise "the predicate should be of type: boolean, not: #{predicate.class.name}" unless predicate == !!predicate
-
-      puts h1
-      # super.merge(h1) if predicate && !force
-      # super.merge!(h1) if predicate && force
+      @hash = @hash.merge(h1) if predicate && !_force
+      @hash = @hash.merge!(h1) if predicate && _force
     end
   end
 
@@ -94,7 +96,7 @@ module Mapr
 
       def include_services?(*elements)
         return false if empty?
-        elements.map { |service| components.include?(service) }.all?
+        elements.map {|service| components.include?(service)}.all?
       end
 
       def components

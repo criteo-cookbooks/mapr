@@ -28,30 +28,25 @@ file File.join(node['mapr']['zookeeper']['dir'], 'zookeeperversion') do
 end
 # Generate the configuration
 #  TODO: The code is not that readable, is there a better way to manager ? let's think about it :p
-config = node['mapr']['zookeeper']['config']
-         .merge(
-           node['mapr']['cluster']['nodes']['zookeeper']
-               .map
-               .with_index
-               .map { |node, index| ["server.#{index}", node + ':2888:3888'] }
-               .to_h,
-         )
-         .merge(
-           'mapr.cldbkeyfile.location' => File.join(node['mapr']['config']['config_dir'], 'cldb.key'),
-         )
+config = Mapr::AttributeMerger.new node['mapr']['zookeeper']['config']
+config.merge true,
+             node['mapr']['cluster']['nodes']['zookeeper']
+                 .map
+                 .with_index
+                 .map {|node, index| ["server.#{index}", node + ':2888:3888']}
+                 .to_h
 
-config = if node['mapr']['cluster']['config']['security']['secure']
-           config.merge('authMech' => 'MAPR-SECURITY')
-         else
-           config.merge(node['mapr']['zookeeper']['security']['config'])
-         end
+config.merge true, {'mapr.cldbkeyfile.location' => File.join(node['mapr']['config']['config_dir'], 'cldb.key')}
+
+config.merge node['mapr']['cluster']['config']['security']['secure'], {'authMech' => 'MAPR-SECURITY'}
+config.merge !node['mapr']['cluster']['config']['security']['secure'], node['mapr']['zookeeper']['security']['config']
 
 template ::File.join(node['mapr']['zookeeper']['dir'], "zookeeper-#{node['mapr']['zookeeper']['version']}", 'conf', 'zoo.cfg') do
   source 'conf.erb'
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']
-  variables(config: config)
+  variables(config: config.hash)
 end
 
 #### Common configuration

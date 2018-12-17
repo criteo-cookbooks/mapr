@@ -23,7 +23,7 @@ MAPR_SERVER_KERBEROS {
       doNotPrompt=true
       useKeyTab=true
       storeKey=true
-      keyTab="<%= @keytab_path %>"
+      keyTab="<%= @mapr_keytab %>"
       isInitiator=false
       principal="<%= @mapr_principal %>";
 };
@@ -47,7 +47,7 @@ MAPR_WEBSERVER_KERBEROS {
       doNotPrompt=true
       useKeyTab=true
       storeKey=true
-      keyTab="<%= @keytab_path %>"
+      keyTab="<%= @spnego_keytab %>"
       isInitiator=false
       principal="<%= @spnego_principal %>";
 };
