@@ -58,7 +58,6 @@ default['mapr']['warden']['config'] = {
   'service.command.nfs4.heapsize.min' => 64,
   'service.command.nfs4.heapsize.max' => 1000,
   'service.nice.value' => -10,
-  'zookeeper.servers' => 'zk1,zk2',
   'nodes.mincount' => 1,
   'services.retries' => 3,
   'cldb.port' => 7222,

@@ -43,6 +43,12 @@ control 'master-packages' do
     its('group') { should cmp 'mapr' }
   end
 
+  describe file('/opt/mapr/zkdata/myid') do
+    its('content') { should cmp '0' }
+    its('owner') { should cmp 'mapr' }
+    its('group') { should cmp 'mapr' }
+  end
+
   describe file('/opt/mapr/conf/mapr.login.conf') do
     # TODO: Enhance the matching, to be able to detect the maximum possible
     its('content') { should match /.*"mapr\/mapr.cluster.com/ }

@@ -26,6 +26,13 @@ file File.join(node['mapr']['zookeeper']['dir'], 'zookeeperversion') do
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
 end
+
+file File.join(node['mapr']['zookeeper']['config']['dataDir'],'myid') do
+  content node['mapr']['zookeeper']['my_id'].to_s
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+end
+
 # Generate the configuration
 #  TODO: The code is not that readable, is there a better way to manager ? let's think about it :p
 config = Mapr::AttributeMerger.new node['mapr']['zookeeper']['config']
