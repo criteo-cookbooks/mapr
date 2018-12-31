@@ -48,7 +48,11 @@ control 'master-packages' do
     its('owner') { should cmp 'mapr' }
     its('group') { should cmp 'mapr' }
   end
-
+  describe file('/opt/mapr/conf/daemon.conf') do
+    its('content') { should cmp inspec.profile.file('daemon.conf') }
+    its('owner') { should cmp 'mapr' }
+    its('group') { should cmp 'mapr' }
+  end
   describe file('/opt/mapr/conf/mapr.login.conf') do
     # TODO: Enhance the matching, to be able to detect the maximum possible
     its('content') { should match /.*"mapr\/mapr.cluster.com/ }

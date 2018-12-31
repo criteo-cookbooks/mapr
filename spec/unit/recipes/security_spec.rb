@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe 'mapr::security' do
-  let(:config_dir) {'/opt/mapr/conf'}
+  let(:config_dir) { '/opt/mapr/conf' }
   context 'Secure mode activated in a storage node' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
-          platform: 'centos',
-          version: '7.4.1708',
+        platform: 'centos',
+        version:  '7.4.1708',
       ).converge(described_recipe)
     end
     it 'should create the ssl files' do
@@ -24,10 +24,10 @@ describe 'mapr::security' do
 
     it 'should generate the maprserverticket' do
       expect(chef_run).to create_template(File.join(config_dir, 'maprserverticket'))
-                              .with_variables(
-                                  cluster_name: 'mapr.cluster.com',
-                                  secret: 'KEY_CONTENT',
-                              )
+        .with_variables(
+          cluster_name: 'mapr.cluster.com',
+          secret:       'KEY_CONTENT',
+        )
     end
   end
 

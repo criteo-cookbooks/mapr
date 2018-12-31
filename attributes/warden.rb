@@ -78,3 +78,9 @@ default['mapr']['warden']['config'] = {
   'services.memoryallocation.alarm.threshold' => 97,
   'isDB' => true,
 }
+
+default['mapr']['warden']['daemon']['config'] = {
+  'mapr.daemon.user' => 'mapr',
+  'mapr.daemon.group' => 'mapr',
+  'mapr.daemon.runuser.warden' => 1,
+}

@@ -6,9 +6,15 @@
  * Used by maprlogin and MapRLogin for client authentication
  */
 MAPR_CLIENT_KERBEROS {
-   org.apache.hadoop.security.login.KerberosBugWorkAroundLoginModule required
-      useTicketCache=true
-      doNotPrompt=true;
+	com.sun.security.auth.module.Krb5LoginModule required
+      refreshKrb5Config=true
+      doNotPrompt=true
+      useKeyTab=true
+      storeKey=true
+      userTicketCache=true
+      keyTab="<%= @mapr_keytab %>"
+      isInitiator=true
+      principal="<%= @mapr_principal %>";
 };
 
 /**
