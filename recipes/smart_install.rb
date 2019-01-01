@@ -1,7 +1,10 @@
 ## A smart way to install the mapr-cluster
 if Mapr::NodeType.empty?
-  raise "node['mapr']['cluster']['components'] is empty.
-Please specify the components you want to install/configure"
+  raise "
+  node['mapr']['cluster']['components'] is empty.
+  Please specify the components you want to install/configure
+  if you want to use the smart_install.
+"
 end
 
 # Include the recipe for the appropriate services
@@ -14,4 +17,4 @@ include_recipe 'mapr::nfs' if Mapr::NodeType.nfs?
 include_recipe 'mapr::grafana' if Mapr::NodeType.grafana?
 include_recipe 'mapr::compute' if Mapr::NodeType.compute?
 include_recipe 'mapr::hs' if Mapr::NodeType.hs?
-include_recipe 'mapr::maMaprst_gateway' if Mapr::NodeType.mg?
+include_recipe 'mapr::mast_gateway' if Mapr::NodeType.mg?
