@@ -33,4 +33,12 @@ control 'secure-cldb' do
   describe file('/opt/mapr/conf/jmxremote.password') do
     its('content') { should cmp inspec.profile.file('jmxremote.password') }
   end
+
+  describe file('/opt/mapr/zookeeper/zookeeper-3.4.5/conf/zoo.cfg') do
+    its('content') { should cmp inspec.profile.file('zoo.cfg') }
+    its('owner') { should cmp 'mapr' }
+    its('group') { should cmp 'mapr' }
+    its('mode') { should cmp '0444' }
+    it { should be_file }
+  end
 end
