@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
-<% config.each do |key, value| %>
+<% @config.each do |key, value| %>
   <% unless value.nil? or value.to_s.empty? %>
   <property>
       <name><%= key %></name>
