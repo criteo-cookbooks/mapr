@@ -21,7 +21,7 @@ end
 
 template File.join(node['mapr']['config']['config_dir'], 'daemon.conf') do
   source 'conf.erb'
-  owner node['mapr']['config']['owner']
+  owner 'root'
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']
   variables(config: node['mapr']['warden']['daemon']['config'])
