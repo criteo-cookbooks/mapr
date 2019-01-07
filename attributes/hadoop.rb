@@ -15,19 +15,19 @@ default['mapr']['hadoop']['resourcemanager']['config'] = {
   'yarn' => {},
   'core' => {},
   'hdfs' => {},
-  'mapr' => {},
+  'mapred' => {},
 }
 
 default['mapr']['hadoop']['compute']['config'] = {
   'yarn' => {},
   'core' => {},
   'hdfs' => {},
-  'mapr' => {},
+  'mapred' => {},
 }
 
 default['mapr']['hadoop']['storage']['config'] = {
   'yarn' => {},
   'core' => {},
   'hdfs' => {},
-  'mapr' => {},
+  'mapred' => {},
 }

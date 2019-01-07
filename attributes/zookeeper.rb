@@ -40,7 +40,7 @@ default['mapr']['zookeeper']['security']['config'] = {
     'quorum.auth.learnerRequireSasl' => true,
     'quorum.auth.serverRequireSasl' => true,
     'quorum.auth.server.saslLoginContext' => 'Server',
-    'quorum.auth.server.saslLoginContext' => 'Server',
+    'quorum.auth.learner.saslLoginContext' => 'Server',
     'quorum.cnxn.threads.size' => 20,
 }
 
