@@ -11,7 +11,7 @@ end
 
 # Generating the configuration
 config = Mapr::AttributeMerger.new(node['mapr']['apiserver']['config'])
-config.merge(node['mapr']['cluster']['config']['security']['secure'], {'mapr.rest.auth.methods' => 'kerberos,basic'})
+config.merge(node['mapr']['cluster']['config']['security']['secure'], 'mapr.rest.auth.methods' => 'kerberos,basic')
 
 template File.join(node['mapr']['apiserver']['config_dir'], 'properties.cfg') do
   source 'conf.erb'

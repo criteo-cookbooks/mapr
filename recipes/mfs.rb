@@ -13,4 +13,3 @@ end
 ##### Generating the default configuration
 include_recipe 'mapr::config'
 include_recipe 'mapr::disks'
-include_recipe 'mapr::hadoop'

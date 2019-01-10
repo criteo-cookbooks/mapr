@@ -23,6 +23,6 @@ template File.join(node['mapr']['config']['config_dir'], 'daemon.conf') do
   source 'conf.erb'
   owner 'root'
   group node['mapr']['config']['group']
-  mode node['mapr']['config']['mode']
+  mode '744'
   variables(config: node['mapr']['warden']['daemon']['config'])
 end

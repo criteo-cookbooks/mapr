@@ -39,8 +39,8 @@ config = Mapr::AttributeMerger.new node['mapr']['zookeeper']['config']
 config.merge(true, node['mapr']['cluster']['nodes']['zookeeper']
                   .map
                   .with_index
-                  .map {|node, index| ["server.#{index}", node + ':2888:3888']}
-                  .to_h)
+                  .map { |node, index| ["server.#{index}", node + ':2888:3888'] }
+                  .to_h,)
 
 config.merge(true, {'mapr.cldbkeyfile.location' => File.join(node['mapr']['config']['config_dir'], 'cldb.key')})
 

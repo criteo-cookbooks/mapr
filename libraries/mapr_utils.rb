@@ -45,9 +45,7 @@ module Mapr
   end
 
   class NodeType
-    "
-    Deduct the node type from it's components
-"
+    "Deduce the node type from it's components"
     class << self
       def empty?
         components.nil? || components.empty?

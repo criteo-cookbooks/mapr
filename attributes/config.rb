@@ -1,6 +1,7 @@
 default['mapr']['config']['owner'] = 'mapr'
 default['mapr']['config']['group'] = 'mapr'
 default['mapr']['config']['mode'] = 0o600
+default['mapr']['config']['home'] = '/opt/mapr'
 default['mapr']['config']['config_dir'] = '/opt/mapr/conf'
 
 #### Hosting machine definition

@@ -31,3 +31,26 @@ default['mapr']['hadoop']['storage']['config'] = {
   'hdfs' => {},
   'mapred' => {},
 }
+
+default['mapr']['hadoop']['ssl'] = {
+  'client' => {
+    'ssl.client.truststore.location' => '/opt/mapr/conf/ssl_truststore',
+    'ssl.client.truststore.password' => 'mapr123',
+    'ssl.client.truststore.type' => 'jks',
+    'ssl.client.truststore.reload.interval' => '10000',
+    'ssl.client.keystore.location' => '/opt/mapr/conf/ssl_keystore',
+    'ssl.client.keystore.password' => 'mapr123',
+    'ssl.client.keystore.keypassword' => 'mapr123',
+    'ssl.client.keystore.type' => 'jks',
+  },
+  'server' => {
+    'ssl.server.truststore.location' => '/opt/mapr/conf/ssl_truststore',
+    'ssl.server.truststore.password' => 'mapr123',
+    'ssl.server.truststore.type' => 'jks',
+    'ssl.server.truststore.reload.interval' => '10000',
+    'ssl.server.keystore.location' => '/opt/mapr/conf/ssl_keystore',
+    'ssl.server.keystore.password' => 'mapr123',
+    'ssl.server.keystore.keypassword' => 'mapr123',
+    'ssl.server.keystore.type' => 'jks',
+  },
+}

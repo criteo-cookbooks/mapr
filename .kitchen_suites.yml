@@ -9,7 +9,7 @@
     mapr:
       config:
         mode: 0444 # Due to bug in KITCHEN-EC2 we can't change the username with which we are connecting, so to see if
-        # do actually create anything, we need to enlarge the permissions of the configuration file
+        # do actually create anything, we need to enlarge the permissions of the configuration files
         # Ref: https://github.com/test-kitchen/kitchen-ec2/issues/225
       cluster:
         components:
@@ -27,7 +27,7 @@
     mapr:
       config:
         mode: 0444 # Due to bug in KITCHEN-EC2 we can't change the username with which we are connecting, so to see if
-        # do actually create anything, we need to enlarge the permissions of the configuration file
+        # do actually create anything, we need to enlarge the permissions of the configuration files
         # Ref: https://github.com/test-kitchen/kitchen-ec2/issues/225
       cluster:
         components:
