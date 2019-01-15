@@ -25,7 +25,7 @@ template File.join(node['mapr']['config']['config_dir'], 'mapr-clusters.conf') d
   variables(config: config.hash)
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
-  mode '0744'
+  mode '0755'
 end
 
 # Generated for security purpose, otherwise the default one is left untacted
