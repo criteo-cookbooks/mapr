@@ -34,6 +34,10 @@
         - cldb
         - mcs
         - zookeeper
+        - resourcemanager
+        - compute
+        - storage
+        - mfs
         config:
           security:
             secure: true

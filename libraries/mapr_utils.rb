@@ -39,6 +39,7 @@ module Mapr
 
     def merge(predicate, hash1, force = false)
       raise "the predicate should be of type: boolean, not: #{predicate.class.name}" unless predicate == !!predicate
+      return if hash1.nil?
       @hash = @hash.merge(hash1) if predicate && !force
       @hash = @hash.merge!(hash1) if predicate && force
     end
