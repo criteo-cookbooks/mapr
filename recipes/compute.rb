@@ -14,16 +14,16 @@ hadoop_config_path = ::File.join(node['mapr']['hadoop']['dir'], "hadoop-#{node['
 template File.join(hadoop_config_path, 'container-executor.cfg') do
   source 'conf.erb'
   variables(config: node['mapr']['hadoop']['config']['container-executor'])
-  owner node['mapr']['config']['owner']
+  owner 'root'
   group node['mapr']['config']['group']
-  mode '0744'
+  mode '0644'
 end
 
 hadoop_bin_path = ::File.join(node['mapr']['hadoop']['dir'], "hadoop-#{node['mapr']['hadoop']['version']}", 'bin')
 file ::File.join(hadoop_bin_path, 'container-executor') do
   owner 'root'
-  group 'mapr'
-  mode '6050'
+  group node['mapr']['config']['group']
+  mode '0755'
 end
 include_recipe 'mapr::disks'
 include_recipe 'mapr::config'

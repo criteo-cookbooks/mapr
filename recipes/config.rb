@@ -7,11 +7,14 @@
 # Usage:
 #   - Used for common configuration for all the component of MaprCluster
 
-directory node['mapr']['config']['config_dir'] do
+config_dir = node['mapr']['config']['config_dir']
+
+directory config_dir do
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
-  mode '0744'
+  mode '0755'
 end
+
 # TODO: The code is not clearly readable
 config = Mapr::AttributeMerger.new node['mapr']['cluster']['config']
 config.merge(true, cldbs: node['mapr']['cluster']['nodes']['cldb']
@@ -20,7 +23,7 @@ config.merge(true, cldbs: node['mapr']['cluster']['nodes']['cldb']
                                .join(' '),)
 
 ### Generate the mapr-clusters.conf
-template File.join(node['mapr']['config']['config_dir'], 'mapr-clusters.conf') do
+template File.join(config_dir, 'mapr-clusters.conf') do
   source 'mapr-clusters.conf.erb'
   variables(config: config.hash)
   owner node['mapr']['config']['owner']
@@ -29,15 +32,24 @@ template File.join(node['mapr']['config']['config_dir'], 'mapr-clusters.conf') d
 end
 
 # Generated for security purpose, otherwise the default one is left untacted
-template File.join(node['mapr']['config']['config_dir'], 'mapr.login.conf') do
+template File.join(config_dir, 'mapr.login.conf') do
   source 'mapr.login.conf.erb'
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
+  mode '0755'
   variables(mapr_principal:   "mapr/#{node['mapr']['cluster']['config']['name']}",
             mapr_keytab:      File.join(node['mapr']['config']['config_dir'], 'mapr.keytab'),
             spnego_principal: "HTTP/#{node['fqdn']}",
             spnego_keytab:    File.join(node['mapr']['config']['config_dir'], 'spnego.keytab'),)
 end
+
+file File.join(config_dir,'env_override.sh') do
+  content node['mapr']['cluster']['env_override.sh']['config']['content']
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  mode '0755'
+end
+
 include_recipe 'mapr::audit'
 include_recipe 'mapr::security' if node['mapr']['cluster']['config']['security']['secure']
 include_recipe 'mapr::hadoop'

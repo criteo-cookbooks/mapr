@@ -14,7 +14,7 @@ node['mapr']['hadoop']['config'].each do |config_name, local_config|
     variables(config: config.hash)
     owner node['mapr']['config']['owner']
     group node['mapr']['config']['group']
-    mode node['mapr']['config']['mode']
+    mode '0755'
   end
 end
 
@@ -25,6 +25,7 @@ node['mapr']['hadoop']['ssl'].each do |peer, ssl_config|
     variables(config: ssl_config)
     owner node['mapr']['config']['owner']
     group node['mapr']['config']['group']
+    mode '755'
   end
   link ::File.join(node['mapr']['config']['config_dir'], "ssl-#{peer}.xml") do
     to ::File.join(hadoop_config_path, "ssl-#{peer}.xml")

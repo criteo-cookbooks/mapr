@@ -28,3 +28,5 @@ default['mapr']['cluster']['sysctl']['config'] = {
 
 #### Used for fast cluster install & config
 default['mapr']['cluster']['components'] = %w[]
+
+default['mapr']['cluster']['env_override.sh']['config']['content'] = ""
