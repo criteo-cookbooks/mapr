@@ -18,7 +18,7 @@ action :create do
 
   template ::File.join(config_dir, "warden.#{new_resource.name}.conf") do
     source 'conf.erb'
-    variables(config: new_resource.config.compact)
+    variables(config: new_resource.config)
     owner new_resource.owner
     group new_resource.group
     mode new_resource.mode

@@ -4,6 +4,7 @@ default['mapr']['apiserver']['config'] = {
     'doc.url' => 'https://maprdocs.mapr.com',
     'proxy.zkservices' => 'elasticsearch, opentsdb',
 }
+
 default['mapr']['apiserver']['config_dir'] = '/opt/mapr/apiserver/conf'
 
 
