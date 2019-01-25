@@ -11,3 +11,7 @@ end
 
 ##### Generating the default configuration
 include_recipe 'mapr::config'
+warden_service 'hs' do
+  config node['mapr']['warden']['resourcemanager']['config']
+  config_dir node['mapr']['config']['config_dir']
+end

@@ -27,3 +27,10 @@ file ::File.join(hadoop_bin_path, 'container-executor') do
 end
 include_recipe 'mapr::disks'
 include_recipe 'mapr::config'
+
+
+# For the nodemanager
+warden_service 'nodemanager' do
+  config node['mapr']['warden']['compute']['config']
+  config_dir node['mapr']['config']['config_dir']
+end
