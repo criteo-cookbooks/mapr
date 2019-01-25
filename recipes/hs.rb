@@ -11,7 +11,7 @@ end
 
 include_recipe 'mapr::config'
 
-warden_service 'hs' do
+warden_service 'historyserver' do
   config node['mapr']['warden']['hs']['config']
   config_dir node['mapr']['config']['config_dir']
 end
