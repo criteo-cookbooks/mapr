@@ -23,8 +23,9 @@ hadoop_bin_path = ::File.join(node['mapr']['hadoop']['dir'], "hadoop-#{node['map
 file ::File.join(hadoop_bin_path, 'container-executor') do
   owner 'root'
   group node['mapr']['config']['group']
-  mode '0755'
+  mode '6050'
 end
+
 include_recipe 'mapr::disks'
 include_recipe 'mapr::config'
 

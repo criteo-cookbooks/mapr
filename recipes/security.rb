@@ -28,7 +28,7 @@ node['mapr']['security']['ssl'].each do |name, description|
     content description['content']
     owner node['mapr']['config']['owner']
     group node['mapr']['config']['group']
-    mode description['mode'] || node['mapr']['config']['mode']
+    mode '0640'
   end
 end
 
