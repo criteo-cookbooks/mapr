@@ -1,6 +1,6 @@
 resource_name :warden_service
 
-property :name, String, required: true, name_property: true
+property :service, String, name_property: true
 property :config, Hash, required: true
 property :config_dir, required: true
 property :owner, String, default: 'mapr'
@@ -16,7 +16,7 @@ action :create do
     mode new_resource.mode
   end
 
-  template ::File.join(config_dir, "warden.#{new_resource.name}.conf") do
+  template ::File.join(config_dir, "warden.#{new_resource.service}.conf") do
     source 'conf.erb'
     variables(config: new_resource.config)
     owner new_resource.owner
