@@ -1,8 +1,9 @@
 #
 # Cookbook Name:: mapr
-# Recipe:: cldb
+# Recipe:: audit
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+
 directory File.join(node['mapr']['config']['home'], 'mapr-cli-audit-log') do
   action :create
   owner node['mapr']['config']['owner']

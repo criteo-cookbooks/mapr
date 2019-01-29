@@ -3,6 +3,7 @@
 # Recipe:: cldb
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+
 include_recipe 'mapr::default'
 
 package 'mapr-cldb' do

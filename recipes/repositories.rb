@@ -4,7 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-# Create MapR tech repository
 yum_repository 'maprcore' do
   description 'MapR Core repository'
   baseurl node['mapr']['repositories']['core_url']

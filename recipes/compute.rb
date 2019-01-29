@@ -3,6 +3,7 @@
 # Recipe:: compute
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+
 include_recipe 'mapr'
 
 package node['mapr']['compute']['packages'] do

@@ -5,11 +5,16 @@ end
 control 'secure-cldb' do
   title 'Secure MapR Cluster'
 
+  # Check that finally we do have the appropriate roles
+  describe command('ls -A /opt/mapr/roles').stdout.split do
+    it { should cmp %w[apiserver cldb fileserver nodemanager resourcemanager zookeeper] }
+  end
+
   describe file('/opt/mapr/conf/mapr-clusters.conf') do
     its('content') { should cmp inspec.profile.file('mapr-clusters.conf') }
     its('owner') { should cmp 'mapr' }
     its('group') { should cmp 'mapr' }
-    its('mode') { should cmp '0444' }
+    its('mode') { should cmp '0755' }
   end
 
   describe file('/opt/mapr/conf/cldb.conf') do

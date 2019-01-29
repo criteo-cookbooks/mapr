@@ -1,8 +1,9 @@
 #
 # Cookbook Name:: mapr
-# Recipe:: default
+# Recipe:: opentsdb
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
+
 include_recipe 'mapr'
 
 package 'mapr-opentsdb' do

@@ -4,10 +4,6 @@ control 'master-packages' do
   Ascertain all the necessary packages have been installed &
   correctly configured
 '
-  # Check that finally we do have the appropriate roles
-  describe command('ls -A /opt/mapr/roles').stdout.split do
-    it { should cmp %w[apiserver cldb fileserver zookeeper] }
-  end
 
   describe service('mapr-warden') do
     it { should be_installed }
@@ -24,14 +20,6 @@ control 'master-packages' do
   describe file('/opt/mapr/conf/cldb.conf') do
     its('owner') { should cmp 'mapr' }
     its('content') { should cmp inspec.profile.file('cldb.conf') }
-    its('group') { should cmp 'mapr' }
-    its('mode') { should cmp '0444' }
-    it { should be_file }
-  end
-
-  describe file('/opt/mapr/conf/warden.conf') do
-    its('content') { should cmp inspec.profile.file('warden.conf') }
-    its('owner') { should cmp 'mapr' }
     its('group') { should cmp 'mapr' }
     its('mode') { should cmp '0444' }
     it { should be_file }
@@ -65,6 +53,11 @@ control 'master-config-without-security' do
   impact 1
   desc 'Ascertain mapr is correctly configured'
 
+  # Check that finally we do have the appropriate roles
+  describe command('ls -A /opt/mapr/roles').stdout.split do
+    it { should cmp %w[apiserver cldb fileserver zookeeper] }
+  end
+
   describe file('/opt/mapr/zookeeper/zookeeper-3.4.5/conf/zoo.cfg') do
     its('content') { should cmp inspec.profile.file('zoo.cfg') }
     its('owner') { should cmp 'mapr' }
@@ -77,5 +70,13 @@ control 'master-config-without-security' do
     its('content') { should cmp inspec.profile.file('mapr-clusters.conf') }
     its('owner') { should cmp 'mapr' }
     its('group') { should cmp 'mapr' }
+  end
+
+  describe file('/opt/mapr/conf/warden.conf') do
+    its('content') { should cmp inspec.profile.file('warden.conf') }
+    its('owner') { should cmp 'mapr' }
+    its('group') { should cmp 'mapr' }
+    its('mode') { should cmp '0444' }
+    it { should be_file }
   end
 end

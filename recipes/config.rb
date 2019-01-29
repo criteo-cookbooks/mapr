@@ -1,11 +1,8 @@
+#
 # Cookbook Name:: mapr
-# Spec:: config
+# Recipe:: config
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
-#
-#
-# Usage:
-#   - Used for common configuration for all the component of MaprCluster
 
 config_dir = node['mapr']['config']['config_dir']
 
@@ -17,6 +14,7 @@ end
 
 # TODO: The code is not clearly readable
 config = Mapr::AttributeMerger.new node['mapr']['cluster']['config']
+
 config.merge(true, cldbs: node['mapr']['cluster']['nodes']['cldb']
                                .product([node['mapr']['cldb']['config']['cldb.port'].to_s])
                                .map { |host, port| host + ':' + port }
@@ -38,9 +36,9 @@ template File.join(config_dir, 'mapr.login.conf') do
   group node['mapr']['config']['group']
   mode '0755'
   variables(mapr_principal:   "mapr/#{node['mapr']['cluster']['config']['name']}",
-            mapr_keytab:      File.join(node['mapr']['config']['config_dir'], 'mapr.keytab'),
+            mapr_keytab:      ::File.join(config_dir, 'mapr.keytab'),
             spnego_principal: "HTTP/#{node['fqdn']}",
-            spnego_keytab:    File.join(node['mapr']['config']['config_dir'], 'spnego.keytab'),)
+            spnego_keytab:    ::File.join(config_dir, 'spnego.keytab'),)
 end
 
 file File.join(config_dir,'env_override.sh') do

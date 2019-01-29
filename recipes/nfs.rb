@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: mapr
-# Recipe:: default
+# Recipe:: nfs
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 include_recipe 'mapr'

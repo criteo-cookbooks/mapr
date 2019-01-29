@@ -11,6 +11,7 @@ config.merge(true, {
                                .product([node['mapr']['zookeeper']['config']['clientPort']])
                                .map {|host, port| "#{host}:#{port}"}
                                .join(',')})
+
 config.merge(Mapr::NodeType.storage?, node['mapr']['warden']['mfs']['config'])
 config.merge(Mapr::NodeType.cldb?, node['mapr']['warden']['cldb']['config'])
 config.merge(Mapr::NodeType.nfs?, node['mapr']['warden']['nfs']['config'])

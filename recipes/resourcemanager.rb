@@ -11,6 +11,7 @@ end
 
 ##### Generating the default configuration
 include_recipe 'mapr::config'
+include_recipe 'mapr::hadoop'
 
 warden_service 'resourcemanager' do
   config node['mapr']['warden']['resourcemanager']['config']

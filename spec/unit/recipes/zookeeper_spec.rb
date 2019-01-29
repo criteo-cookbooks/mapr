@@ -39,30 +39,7 @@ describe 'mapr::zookeeper' do
     end
     it 'should configure zookeeper' do
       expect(chef_run).to create_template('/opt/mapr/zookeeper/zookeeper-3.4.5/conf/zoo.cfg')
-        .with_variables(config: {
-                          'authMech' => 'SIMPLE-SECURITY',
-                          'authProvider.1' => 'org.apache.zookeeper.server.auth.SASLAuthenticationProvider',
-                          'autopurge.purgeInterval' => 24,
-                          'clientPort' => 5181,
-                          'dataDir' => '/opt/mapr/zkdata',
-                          'initLimit' => 20,
-                          'mapr.cldbkeyfile.location' => '/opt/mapr/conf/cldb.key',
-                          'maxClientCnxns' => 1000,
-                          'readUser' => 'anyone',
-                          'superUser' => 'mapr',
-                          'syncLimit' => 10,
-                          'tickTime' => 2000,
-                          'mapr.usemaprserverticket' => true,
-                          'quorum.auth.enableSasl' => false,
-                          'quorum.auth.learnerRequireSasl' => false,
-                          'quorum.auth.serverRequireSasl' => false,
-                          'quorum.auth.learner.loginContext' => 'QuorumLearner',
-                          'quorum.auth.server.loginContext' => 'QuorumServer',
-                          'quorum.cnxn.threads.size' => 20,
-                          'server.0' => 'zk1:2888:3888',
-                          'server.1' => 'zk2:2888:3888',
-                          'server.2' => 'zk3:2888:3888',
-                        },)
+        .with_variables(config: {"authMech"=>"SIMPLE-SECURITY", "authProvider.1"=>"org.apache.zookeeper.server.auth.SASLAuthenticationProvider", "autopurge.purgeInterval"=>24, "clientPort"=>5181, "dataDir"=>"/opt/mapr/zkdata", "initLimit"=>20, "mapr.cldbkeyfile.location"=>"/opt/mapr/conf/cldb.key", "mapr.usemaprserverticket"=>true, "maxClientCnxns"=>1000, "readUser"=>"anyone", "server.0"=>"zk1:2888:3888", "server.1"=>"zk2:2888:3888", "server.2"=>"zk3:2888:3888", "superUser"=>"mapr", "syncLimit"=>10, "tickTime"=>2000},)
     end
 
     it 'should include the recipe default' do
@@ -98,26 +75,9 @@ describe 'mapr::zookeeper' do
         .with(
           owner:     'mapr',
           group:     'mapr',
-          mode:      0o400,
+          mode:      0o600,
           variables: {
-            config: {
-              'authMech' => 'MAPR-SECURITY',
-              'authProvider.1' => 'org.apache.zookeeper.server.auth.SASLAuthenticationProvider',
-              'autopurge.purgeInterval' => 24,
-              'clientPort' => 5181,
-              'dataDir' => '/opt/mapr/zkdata',
-              'initLimit' => 20,
-              'mapr.cldbkeyfile.location' => '/opt/mapr/conf/cldb.key',
-              'maxClientCnxns' => 1000,
-              'readUser' => 'anyone',
-              'superUser' => 'mapr',
-              'syncLimit' => 10,
-              'tickTime' => 2000,
-              'mapr.usemaprserverticket' => true,
-              'server.0' => 'zk1:2888:3888',
-              'server.1' => 'zk2:2888:3888',
-              'server.2' => 'zk3:2888:3888',
-            },
+            config: {"authMech"=>"MAPR-SECURITY", "authProvider.1"=>"org.apache.zookeeper.server.auth.SASLAuthenticationProvider", "autopurge.purgeInterval"=>24, "clientPort"=>5181, "dataDir"=>"/opt/mapr/zkdata", "initLimit"=>20, "mapr.cldbkeyfile.location"=>"/opt/mapr/conf/cldb.key", "mapr.usemaprserverticket"=>true, "maxClientCnxns"=>1000, "quorum.auth.enableSasl"=>true, "quorum.auth.learner.saslLoginContext"=>"Server", "quorum.auth.learnerRequireSasl"=>true, "quorum.auth.server.saslLoginContext"=>"Server", "quorum.auth.serverRequireSasl"=>true, "quorum.cnxn.threads.size"=>20, "readUser"=>"anyone", "server.0"=>"zk1:2888:3888", "server.1"=>"zk2:2888:3888", "server.2"=>"zk3:2888:3888", "superUser"=>"mapr", "syncLimit"=>10, "tickTime"=>2000},
           },
         )
     end
