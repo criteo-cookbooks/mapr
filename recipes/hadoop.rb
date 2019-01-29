@@ -6,7 +6,6 @@
 #
 # Description: Configure hadoop components
 
-
 hadoop_config_path = ::File.join(node['mapr']['hadoop']['dir'], "hadoop-#{node['mapr']['hadoop']['version']}", 'etc', 'hadoop')
 
 node['mapr']['hadoop']['config'].each do |config_name, local_config|

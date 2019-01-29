@@ -30,7 +30,6 @@ end
 include_recipe 'mapr::disks'
 include_recipe 'mapr::config'
 
-
 # For the nodemanager
 warden_service 'nodemanager' do
   config node['mapr']['warden']['compute']['config']

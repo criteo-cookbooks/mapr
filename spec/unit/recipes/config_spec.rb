@@ -5,6 +5,7 @@
 
 require 'spec_helper'
 
+# rubocop: disable BlockLength
 describe 'mapr::config' do
   let(:mapr_clusters) { '/opt/mapr/conf/mapr-clusters.conf' }
   context 'Mapr Config without Kerberos' do
@@ -86,3 +87,4 @@ describe 'mapr::config' do
     end
   end
 end
+# rubocop: enable BlockLength

@@ -20,7 +20,7 @@ file File.join(config_dir, 'cldb.key') do
   content node['mapr']['security']['cldb.key']['content']
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
-  only_if {Mapr::NodeType.cldb? || Mapr::NodeType.zookeeper?}
+  only_if { Mapr::NodeType.cldb? || Mapr::NodeType.zookeeper? }
 end
 
 # Generating the ssl files
@@ -37,7 +37,7 @@ end
 template File.join(config_dir, 'maprserverticket') do
   source 'maprserverticket.erb'
   variables(cluster_name: node['mapr']['cluster']['config']['name'],
-            secret: node['mapr']['security']['maprserverticket']['content'],)
+            secret:       node['mapr']['security']['maprserverticket']['content'],)
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']

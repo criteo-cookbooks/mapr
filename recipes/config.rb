@@ -41,7 +41,7 @@ template File.join(config_dir, 'mapr.login.conf') do
             spnego_keytab:    ::File.join(config_dir, 'spnego.keytab'),)
 end
 
-file File.join(config_dir,'env_override.sh') do
+file File.join(config_dir, 'env_override.sh') do
   content node['mapr']['cluster']['env_override.sh']['config']['content']
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']

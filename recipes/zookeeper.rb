@@ -42,9 +42,9 @@ config.merge(true, node['mapr']['cluster']['nodes']['zookeeper']
                   .map { |node, index| ["server.#{index}", node + ':2888:3888'] }
                   .to_h,)
 
-config.merge(true, {'mapr.cldbkeyfile.location' => File.join(node['mapr']['config']['config_dir'], 'cldb.key')})
+config.merge(true, Hash['mapr.cldbkeyfile.location' => File.join(node['mapr']['config']['config_dir'], 'cldb.key')])
 
-config.merge(node['mapr']['cluster']['config']['security']['secure'], {'authMech' => 'MAPR-SECURITY'})
+config.merge(node['mapr']['cluster']['config']['security']['secure'], Hash['authMech' => 'MAPR-SECURITY'])
 config.merge(node['mapr']['cluster']['config']['security']['secure'], node['mapr']['zookeeper']['security']['config'])
 
 template ::File.join(node['mapr']['zookeeper']['dir'], "zookeeper-#{node['mapr']['zookeeper']['version']}", 'conf', 'zoo.cfg') do

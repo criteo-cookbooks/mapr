@@ -4,7 +4,6 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-
 # Configure repositories
 include_recipe 'mapr::repositories'
 

@@ -30,23 +30,23 @@ module Mapr
   end
 
   class AttributeMerger
-    ' Merge two arrays if a predicate is true '
     attr_reader :hash
 
     def initialize(hash)
       @hash = hash
     end
 
+    # rubocop : disable CyclomaticComplexity
     def merge(predicate, hash1, force = false)
-      raise "the predicate should be of type: boolean, not: #{predicate.class.name}" unless predicate == !!predicate
+      raise "the predicate should be of type: boolean, not: #{predicate.class.name}" unless [true, false].include?(predicate)
       return if hash1.nil?
       @hash = @hash.merge(hash1) if predicate && !force
       @hash = @hash.merge!(hash1) if predicate && force
     end
+    # rubocop : enable CyclomaticComplexity
   end
 
   class NodeType
-    "Deduce the node type from it's components"
     class << self
       def empty?
         components.nil? || components.empty?

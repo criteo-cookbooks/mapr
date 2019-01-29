@@ -6,11 +6,11 @@
 # TO Be updated for better views
 
 config = Mapr::AttributeMerger.new node['mapr']['warden']['config']
-config.merge(true, {
+config.merge(true, Hash[
     'zookeeper.servers' => node['mapr']['cluster']['nodes']['zookeeper']
                                .product([node['mapr']['zookeeper']['config']['clientPort']])
-                               .map {|host, port| "#{host}:#{port}"}
-                               .join(',')})
+                               .map { |host, port| "#{host}:#{port}" }
+                               .join(',')],)
 
 config.merge(Mapr::NodeType.storage?, node['mapr']['warden']['mfs']['config'])
 config.merge(Mapr::NodeType.cldb?, node['mapr']['warden']['cldb']['config'])
@@ -27,7 +27,7 @@ template File.join(node['mapr']['config']['config_dir'], 'warden.conf') do
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
   mode node['mapr']['config']['mode']
-  variables(config: config.hash.merge('services' => services))
+  variables(config: config.hash.merge(Hash['services' => services]))
 end
 
 template File.join(node['mapr']['config']['config_dir'], 'daemon.conf') do

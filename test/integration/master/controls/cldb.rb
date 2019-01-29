@@ -43,7 +43,7 @@ control 'master-packages' do
   end
   describe file('/opt/mapr/conf/mapr.login.conf') do
     # TODO: Enhance the matching, to be able to detect the maximum possible
-    its('content') { should match /.*"mapr\/mapr.cluster.com/ }
+    its('content') { should match(%r{.*"mapr\/mapr.cluster.com}) }
     its('owner') { should cmp 'mapr' }
     its('group') { should cmp 'mapr' }
   end
