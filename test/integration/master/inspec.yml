@@ -7,5 +7,4 @@ summary: Install and Configure MapR Cluster Without Kerberos
 version: 0.0.1
 supports:
   - os-family: linux
-inspec_version: "> 3.0.25"
 license: Apache-2.0

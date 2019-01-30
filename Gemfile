@@ -20,3 +20,4 @@ end
 # Other gems should go after this comment
 gem 'rubocop', '=0.58.2'
 gem 'chef-vault'
+gem 'inspec', '2.1.0'

@@ -7,7 +7,6 @@ summary: Install and Configure MapR Cluster With Kerberos
 version: 0.0.1
 supports:
   - os-family: linux
-inspec_version: "> 3.0.25"
 license: Apache-2.0
 depends:
   - name: mapr-master
