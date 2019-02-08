@@ -1,6 +1,6 @@
 ### Main attributes ###
 default['mapr']['core']['version'] = '6.0.1'
-default['mapr']['expansionpack']['version'] = '5.0'
+default['mapr']['expansionpack']['version'] = '6.0.0'
 
 ### Repositories attributes ###
 base_url = 'http://package.mapr.com/releases/'
