@@ -29,7 +29,7 @@ node['mapr']['security']['ssl'].each do |name, description|
     content description['content']
     owner node['mapr']['config']['owner']
     group node['mapr']['config']['group']
-    mode '0640'
+    mode name.eql?('ssl_truststore') ? '0644' : '0640'
   end
 end
 
