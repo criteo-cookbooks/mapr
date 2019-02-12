@@ -55,8 +55,7 @@ default['mapr']['nfs']['mount_options'] = %w[
   nfsvers=3
 ]
 ### MFS attributes ###
-# Define list of disks to configure
-# Ex: %w[/dev/sdb /dev/sdc ...]
-default['mapr']['mfs']['config']['disks'] = %w[disk1 disk2 disk3]
+# Disks to format and use
+default['mapr']['mfs']['config']['disks'] = ::Mapr::DiskSetup.unpartitioned_disks(node)
 # Number of disks in a storage pool
 default['mapr']['mfs']['config']['stripe_width'] = 3
