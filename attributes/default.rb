@@ -59,4 +59,4 @@ default['mapr']['nfs']['mount_options'] = %w[
 # Ex: %w[/dev/sdb /dev/sdc ...]
 default['mapr']['mfs']['config']['disks'] = %w[disk1 disk2 disk3]
 # Number of disks in a storage pool
-default['mapr']['mfs']['config']['stripe_width'] = 3
+default['mapr']['mfs']['config']['stripe_width'] = 1
