@@ -21,5 +21,9 @@ describe 'mapr::opentsdb' do
     it 'installs mapr opentsdb package' do
       expect(chef_run).to upgrade_package('mapr-opentsdb')
     end
+
+    it 'should include the recipe default' do
+      expect(chef_run).to include_recipe('mapr')
+    end
   end
 end

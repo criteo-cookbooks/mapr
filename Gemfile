@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'berkshelf'
-gem 'kitchen-vagrant'
 gem 'chefspec'
+gem 'kitchen-inspec'
 gem 'rake'
 gem 'foodcritic'
 gem 'chef-zero-scheduled-task'
@@ -19,3 +19,5 @@ end
 
 # Other gems should go after this comment
 gem 'rubocop', '=0.58.2'
+gem 'chef-vault'
+gem 'inspec', '2.1.0'

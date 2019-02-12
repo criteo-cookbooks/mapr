@@ -1,0 +1,10 @@
+name: mapr-master
+title: MaprSepc - Not Secure
+maintainer: Criteo, Inc.
+copyright: Criteo, Inc.
+copyright_email: lake-storage@criteo.com
+summary: Install and Configure MapR Cluster Without Kerberos
+version: 0.0.1
+supports:
+  - os-family: linux
+license: Apache-2.0

@@ -21,5 +21,9 @@ describe 'mapr::grafana' do
     it 'installs mapr grafana package' do
       expect(chef_run).to upgrade_package('mapr-grafana')
     end
+
+    it 'should include the recipe default' do
+      expect(chef_run).to include_recipe('mapr')
+    end
   end
 end
