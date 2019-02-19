@@ -18,6 +18,18 @@ module Mapr
       disks.sort
     end
 
+    def unpartitioned_disks(node)
+      disks_and_partitions = ::Dir.glob ['/dev/disk/by-id/wwn-*']
+      partition_regex = Regexp.new(/-part[0-9]*/)
+      partitionned_disks = disks_and_partitions.grep(partition_regex).map{|dev| dev.sub(partition_regex, '')}.uniq
+      disks = disks_and_partitions.grep_v(partition_regex)
+      unpartitioned = disks - partitionned_disks
+      unpartitioned.select do |wwn|
+        status = node['block_device'][::File.basename(::File.readlink(wwn))]
+        status && status['state'] == 'running' && status['removable'] == '0'
+      end.sort
+    end
+
     def build_command(opts, stripe_width, disks_file)
       cmd_string = MAPR_DISKSETUP_SCRIPT.dup
       if opts.include?('-W')
