@@ -16,7 +16,9 @@ control 'master-packages' do
 
   describe service('mapr-zookeeper') do
     it { should be_installed }
+    it { should be_enabled }
   end
+
   describe file('/opt/mapr/conf/cldb.conf') do
     its('owner') { should cmp 'mapr' }
     its('content') { should cmp inspec.profile.file('cldb.conf') }
