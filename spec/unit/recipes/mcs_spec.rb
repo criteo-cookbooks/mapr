@@ -40,5 +40,13 @@ describe 'mapr::mcs' do
           },
         )
     end
+
+    it 'creates log directory with correct permissions' do
+      expect(chef_run).to create_directory('/opt/mapr/apiserver/logs').with(
+        owner: 'mapr',
+        group: 'mapr',
+        mode:  0o755,
+      )
+    end
   end
 end
