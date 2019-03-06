@@ -25,6 +25,12 @@ end
 ##### Generating the default configuration
 include_recipe 'mapr::config'
 
+directory ::File.dirname(node['mapr']['warden']['apiserver']['config']['service.logs.location']) do
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  mode 0o755
+end
+
 # Generate the warden.apiserver
 warden_service 'apiserver' do
   config_dir node['mapr']['config']['config_dir']
