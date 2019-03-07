@@ -13,9 +13,17 @@ include_recipe 'java::default'
 # Create user and group mapr
 group node['mapr']['config']['group']
 
+ohai_resource = 'reload user information for mapr'
+
+ohai ohai_resource do
+  plugin 'user'
+  action :nothing
+end
+
 user node['mapr']['config']['owner'] do
   comment 'MapR user'
   group node['mapr']['config']['group']
+  notifies :reload, ohai_resource, :immediate
 end
 
 # Install required packages
