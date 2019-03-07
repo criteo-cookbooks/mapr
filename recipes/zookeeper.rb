@@ -55,5 +55,9 @@ template ::File.join(node['mapr']['zookeeper']['dir'], "zookeeper-#{node['mapr']
   variables(config: config.hash)
 end
 
+service 'mapr-zookeeper' do
+  action %w[start enable]
+end
+
 #### Common configuration
 include_recipe 'mapr::config'
