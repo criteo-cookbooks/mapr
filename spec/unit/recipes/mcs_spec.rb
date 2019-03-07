@@ -29,6 +29,22 @@ describe 'mapr::mcs' do
       expect(chef_run).to include_recipe('mapr')
     end
 
+    it 'creates apiserver tmp directory with correct permissions' do
+      expect(chef_run).to create_directory('/opt/mapr/apiserver/tmp').with(
+        owner: 'mapr',
+        group: 'mapr',
+        mode:  0o755,
+      )
+    end
+
+    it 'creates apiserver PID file with correct permissions' do
+      expect(chef_run).to create_file('/opt/mapr/apiserver/conf/apiserver.pid').with(
+        owner: 'mapr',
+        group: 'mapr',
+        mode:  0o644,
+      )
+    end
+
     it 'configure the api server' do
       expect(chef_run).to create_template('/opt/mapr/apiserver/conf/properties.cfg')
         .with_variables(

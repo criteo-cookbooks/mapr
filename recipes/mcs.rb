@@ -36,3 +36,15 @@ warden_service 'apiserver' do
   config_dir node['mapr']['config']['config_dir']
   config node['mapr']['warden']['apiserver']['config']
 end
+
+directory ::File.join(::File.dirname(::File.dirname(node['mapr']['warden']['apiserver']['config']['service.logs.location'])), 'tmp') do
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  mode 0o755
+end
+
+file ::File.join(node['mapr']['apiserver']['config_dir'], 'apiserver.pid') do
+  owner node['mapr']['config']['owner']
+  group node['mapr']['config']['group']
+  mode 0o644
+end
