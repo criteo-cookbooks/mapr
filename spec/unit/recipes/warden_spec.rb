@@ -24,7 +24,7 @@ describe 'mapr::warden' do
         .with(
           owner:     'mapr',
           group:     'mapr',
-          mode:      0o600,
+          mode:      0o644,
           variables: {
             config: {
               'centralconfig.enabled' => true,

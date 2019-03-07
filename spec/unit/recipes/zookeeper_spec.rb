@@ -93,7 +93,7 @@ describe 'mapr::zookeeper' do
         .with(
           owner:     'mapr',
           group:     'mapr',
-          mode:      0o600,
+          mode:      0o644,
           variables: {
             config: {
               'authMech' => 'MAPR-SECURITY',
