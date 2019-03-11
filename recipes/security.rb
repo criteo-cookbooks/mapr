@@ -20,6 +20,7 @@ file File.join(config_dir, 'cldb.key') do
   content node['mapr']['security']['cldb.key']['content']
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
+  mode 0o600
   only_if { Mapr::NodeType.cldb? || Mapr::NodeType.zookeeper? }
 end
 
@@ -40,7 +41,7 @@ template File.join(config_dir, 'maprserverticket') do
             secret:       node['mapr']['security']['maprserverticket']['content'],)
   owner node['mapr']['config']['owner']
   group node['mapr']['config']['group']
-  mode node['mapr']['config']['mode']
+  mode 0o600
 end
 
 node['mapr']['security']['jmx']['config'].each do |type, config|
@@ -49,6 +50,6 @@ node['mapr']['security']['jmx']['config'].each do |type, config|
     variables(config: config)
     owner node['mapr']['config']['owner']
     group node['mapr']['config']['group']
-    mode node['mapr']['config']['mode']
+    mode 0o600
   end
 end
