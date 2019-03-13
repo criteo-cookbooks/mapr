@@ -5,6 +5,7 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 include_recipe 'mapr'
+include_recipe 'mapr::acls'
 
 package 'mapr-webserver' do
   action :upgrade
