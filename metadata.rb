@@ -6,7 +6,7 @@ description      'MapR cookbook'
 long_description 'Install and configure MapR'
 issues_url       'https://github.com/criteo-cookbooks/mapr/issues'
 source_url       'https://github.com/criteo-cookbooks/mapr'
-version          '0.2.0'
+version          '0.3.0'
 supports         'centos'
 
 chef_version '>= 12.5' if respond_to?(:chef_version)
