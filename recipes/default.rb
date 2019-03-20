@@ -10,13 +10,7 @@ include_recipe 'mapr::repositories'
 # Install java
 include_recipe 'java::default'
 
-# Create user and group mapr
-group node['mapr']['config']['group']
-
-user node['mapr']['config']['owner'] do
-  comment 'MapR user'
-  group node['mapr']['config']['group']
-end
+include_recipe 'mapr::users'
 
 # Install required packages
 package node['mapr']['prerequisite']['packages'] do
