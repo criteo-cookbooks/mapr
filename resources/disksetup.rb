@@ -4,7 +4,7 @@ property :stripe_width, Integer
 property :opts, Array
 
 load_current_value do |_new_resource|
-  configured_disks = ::Mapr::DiskSetup.configured_disks()
+  configured_disks = ::Mapr::DiskSetup.configured_disks
   if configured_disks
     disks configured_disks
   else
@@ -21,8 +21,10 @@ action :run do
 
     # Create tmpfile containing disks list
     diskfile = ::File.join('/tmp/', "disksetup_#{name.gsub(/ /, '_')}.txt")
+
+    disks_to_configure = disks - ::Mapr::DiskSetup.configured_disks
     file diskfile do
-      content disks.join("\n")
+      content disks_to_configure.join("/n")
     end
     cmd = ::Mapr::DiskSetup.build_command(opts, stripe_width, diskfile)
 
