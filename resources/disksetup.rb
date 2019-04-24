@@ -24,7 +24,7 @@ action :run do
 
     disks_to_configure = disks - ::Mapr::DiskSetup.configured_disks
     file diskfile do
-      content disks_to_configure.join("/n")
+      content disks_to_configure.join("\n")
     end
     cmd = ::Mapr::DiskSetup.build_command(opts, stripe_width, diskfile)
 
