@@ -47,16 +47,16 @@ describe 'mapr::disks' do
     end
 
     it 'create diskfile' do
-      expect(chef_run).to render_file('/tmp/disksetup_format_all_disks.txt')
+      expect(chef_run).to render_file('/tmp/disksetup_configure_new_disks.txt')
         .with_content("#{disk3}\n#{disk2}\n#{disk0}\n")
     end
     it 'execute disksetup' do
-      expect(chef_run).to run_execute('MapR disksetup format all disks')
-        .with(command: '/opt/mapr/server/disksetup -W 1 -F /tmp/disksetup_format_all_disks.txt')
+      expect(chef_run).to run_execute('MapR disksetup configure new disks')
+        .with(command: '/opt/mapr/server/disksetup -W 1 -F /tmp/disksetup_configure_new_disks.txt')
     end
     it 'should execute the mapr request' do
       # TODO: Finish with the mapr version
-      expect(chef_run).to run_mapr_disksetup('format all disks')
+      expect(chef_run).to run_mapr_disksetup('configure new disks')
     end
   end
 end
