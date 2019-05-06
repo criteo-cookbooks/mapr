@@ -104,6 +104,14 @@ module Mapr
         include_services?('mg')
       end
 
+      def opentsdb?
+        include_services?('opentsdb')
+      end
+
+      def collectd?
+        include_services?('collectd')
+      end
+
       private
 
       def include_services?(*elements)
