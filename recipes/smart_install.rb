@@ -18,5 +18,6 @@ include_recipe 'mapr::grafana' if Mapr::NodeType.grafana?
 include_recipe 'mapr::compute' if Mapr::NodeType.compute?
 include_recipe 'mapr::hs' if Mapr::NodeType.hs?
 include_recipe 'mapr::mast_gateway' if Mapr::NodeType.mg?
+include_recipe 'mapr::httpfs' if Mapr::NodeType.httpfs?
 include_recipe 'mapr::opentsdb' if Mapr::NodeType.opentsdb?
 include_recipe 'mapr::collectd' if Mapr::NodeType.collectd?

@@ -104,6 +104,10 @@ module Mapr
         include_services?('mg')
       end
 
+      def httpfs?
+        include_services?('httpfs')
+      end
+
       def opentsdb?
         include_services?('opentsdb')
       end
