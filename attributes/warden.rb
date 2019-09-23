@@ -70,21 +70,13 @@ default['mapr']['warden']['mfs']['config'] = {
 default['mapr']['warden']['nfs']['services'] = 'nfs:all:cldb'
 default['mapr']['warden']['nfs']['config'] = {
   'service.command.nfs.start' => '/opt/mapr/initscripts/mapr-nfsserver start',
-  'service.command.nfs4.start' => '/opt/mapr/initscripts/mapr-nfs4server start',
   'service.command.nfs.stop' => '/opt/mapr/initscripts/mapr-nfsserver stop',
-  'service.command.nfs4.stop' => '/opt/mapr/initscripts/mapr-nfs4server stop',
   'service.command.nfs.type' => 'BACKGROUND',
-  'service.command.nfs4.type' => 'BACKGROUND',
   'service.command.nfs.monitor' => 'server/nfsserver',
-  'service.command.nfs4.monitor' => 'bin/nfs4server',
   'service.command.nfs.monitorcommand' => '/opt/mapr/initscripts/mapr-nfsserver status',
-  'service.command.nfs4.monitorcommand' => '/opt/mapr/initscripts/mapr-nfs4server status',
   'service.command.nfs.heapsize.percent' => 3,
   'service.command.nfs.heapsize.min' => 64,
   'service.command.nfs.heapsize.max' => 1000,
-  'service.command.nfs4.heapsize.percent' => 3,
-  'service.command.nfs4.heapsize.min' => 64,
-  'service.command.nfs4.heapsize.max' => 1000,
 }
 
 default['mapr']['warden']['daemon']['config'] = {
