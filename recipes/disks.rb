@@ -4,7 +4,7 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-mapr_disksetup 'format all disks' do
+mapr_disksetup 'configure new disks' do
   disks node['mapr']['mfs']['config']['disks'].sort
   stripe_width node['mapr']['mfs']['config']['stripe_width']
   opts %w[-W -F]
