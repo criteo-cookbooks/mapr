@@ -10,6 +10,9 @@
 # - AWS_SUBNET
 # - KITCHEN_NO_CONCURRENCY set it to true if you do not want concurrency
 
+provisioner:
+  chef_license: accept
+
 driver:
   name: ec2
   instance_type: t2.micro
