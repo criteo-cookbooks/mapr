@@ -18,6 +18,7 @@ action :create do
 
   template ::File.join(config_dir, "warden.#{new_resource.service}.conf") do
     source 'conf.erb'
+    cookbook 'mapr'
     variables(config: new_resource.config)
     owner new_resource.owner
     group new_resource.group
