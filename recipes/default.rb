@@ -8,7 +8,7 @@
 include_recipe 'mapr::repositories'
 
 # Install java
-include_recipe 'java::default'
+openjdk_install node['java']['jdk_version']
 
 include_recipe 'mapr::users'
 

@@ -6,7 +6,7 @@ describe 'mapr::security' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.6.1810',
       ).converge(described_recipe)
     end
     it 'should create the ssl files' do
@@ -33,7 +33,7 @@ describe 'mapr::security' do
 
   context 'Secure mode in a master node' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new platform: 'centos', version: '7.4.1708' do |node|
+      ChefSpec::SoloRunner.new platform: 'centos', version: '7.6.1810' do |node|
         node.override['mapr']['cluster']['components'] = %w[cldb]
         node.override['mapr']['cluster']['config']['security']['secure'] = true
       end.converge(described_recipe)
