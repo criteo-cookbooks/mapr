@@ -6,14 +6,14 @@
 require 'spec_helper'
 
 describe 'mapr::disks' do
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.6.1810' do
     let(:disk0) { '/dev/disk/by-id/wwn-0x12345678' }
     let(:disk2) { '/dev/disk/by-id/wwn-0x02346578' }
     let(:disk3) { '/dev/disk/by-id/wwn-0x00346578' }
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new(
         platform:  'centos',
-        version:   '7.4.1708',
+        version:   '7.6.1810',
         step_into: %w[mapr_disksetup],
       ) do |node|
         ['a', 'b', 'r', 'z', 'y', 't'].each do |t|

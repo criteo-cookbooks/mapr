@@ -24,7 +24,6 @@ default['mapr']['repositories']['expansionpack_url'] = ::File.join(
 )
 
 ### Java Attributes ###
-default['java']['install_flavor'] = 'openjdk'
 default['java']['jdk_version'] = '8'
 
 ### Prerequisites ###

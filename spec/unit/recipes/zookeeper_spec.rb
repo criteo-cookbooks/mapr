@@ -11,7 +11,7 @@ describe 'mapr::zookeeper' do
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.6.1810',
       )
       runner.converge(described_recipe)
     end
@@ -68,7 +68,7 @@ describe 'mapr::zookeeper' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.6.1810',
       ) do |node|
         node.override['mapr']['cluster']['config']['security']['secure'] = true
       end.converge(described_recipe)
