@@ -11,6 +11,6 @@ supports         'centos'
 
 chef_version '>= 12.5' if respond_to?(:chef_version)
 
-depends 'java' '>= 8.0.0'
+depends 'java'
 depends 'sysctl' # sysctl will be integrated as a chef resource in Chef 14. We still need it so far
 depends 'chef-vault'
