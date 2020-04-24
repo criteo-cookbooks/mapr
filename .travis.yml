@@ -23,8 +23,9 @@ before_deploy:
 - openssl aes-256-cbc -K $encrypted_eb3fc2d5c3da_key -iv $encrypted_eb3fc2d5c3da_iv
   -in .travis/client.pem.enc -out .travis/client.pem -d
 before_install:
-- openssl aes-256-cbc -K $encrypted_eb3fc2d5c3da_key -iv $encrypted_eb3fc2d5c3da_iv
-  -in .travis/travis-ci.pem.enc -out .travis/travis-ci.pem.criteo -d
-- cp -v .travis/travis-ci.pem.criteo ~/.ssh/id_rsa
+- '[ -n "$encrypted_eb3fc2d5c3da_iv" ] && openssl aes-256-cbc -K $encrypted_eb3fc2d5c3da_key
+  -iv $encrypted_eb3fc2d5c3da_iv -in .travis/travis-ci.pem.enc -out .travis/travis-ci.pem.criteo
+  -d'
+- "[ -f .travis-ci.pem.criteo ] && cp -v .travis-ci.pem.criteo ~/.ssh/id_rsa"
 - yes | gem update --system --force
 - gem install bundler
