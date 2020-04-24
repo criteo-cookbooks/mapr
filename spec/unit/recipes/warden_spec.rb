@@ -67,5 +67,8 @@ describe 'mapr::warden' do
           },
         )
     end
+    it 'should create the warden systemd unit file' do
+      expect(chef_run).to render_file('/etc/systemd/system/mapr-warden.service').with_content(/User=mapr/)
+    end
   end
 end

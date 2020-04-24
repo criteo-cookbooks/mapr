@@ -126,6 +126,9 @@ describe 'mapr::zookeeper' do
     it 'should include the recipe default' do
       expect(chef_run).to include_recipe('mapr')
     end
+    it 'should create the zookeeper systemd unit file' do
+      expect(chef_run).to render_file('/etc/systemd/system/mapr-zookeeper.service').with_content(/User=mapr/)
+    end
   end
 end
 # rubocop: enable BlockLength
