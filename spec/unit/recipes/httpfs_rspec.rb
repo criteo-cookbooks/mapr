@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'mapr::httpfs' do
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.7.1908' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform:  'centos',
-        version:   '7.4.1708',
+        version:   '7.7.1908',
         step_into: ['warden_service'],
         ).converge(described_recipe)
     end
@@ -29,7 +29,7 @@ describe 'mapr::httpfs' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform:  'centos',
-        version:   '7.4.1708',
+        version:   '7.7.1908',
         step_into: ['warden_service'],
         ) do |node|
         node.override['mapr']['httpfs']['nb_servers']  = 46

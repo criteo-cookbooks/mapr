@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe 'mapr::mast_gateway' do
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.7.1908' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform:  'centos',
-        version:   '7.4.1708',
+        version:   '7.7.1908',
         step_into: ['warden_service'],
       ).converge(described_recipe)
     end

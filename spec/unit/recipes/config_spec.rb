@@ -12,7 +12,7 @@ describe 'mapr::config' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform:  'centos',
-        version:   '7.4.1708',
+        version:   '7.7.1908',
         step_into: %w[mapr_configure_sh],
       ).converge(described_recipe)
     end
@@ -42,7 +42,7 @@ describe 'mapr::config' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.7.1908',
       ) do |node|
         node.override['mapr']['cluster']['config']['security']['secure'] = true
       end.converge(described_recipe)

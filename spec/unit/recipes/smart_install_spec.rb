@@ -10,7 +10,7 @@ describe 'mapr::smart_install' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.7.1908',
       ) do |node|
         node.override['mapr']['cluster']['components'] = %w[cldb resourcemanager zookeeper]
       end.converge(described_recipe)
