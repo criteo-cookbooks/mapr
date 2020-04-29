@@ -7,9 +7,9 @@ require 'spec_helper'
 
 describe 'mapr::hadoop' do
   let(:hadoop_path) { '/opt/mapr/hadoop/hadoop-2.7.0/etc/hadoop' }
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.7.1908' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new platform: 'centos', version: '7.4.1708' do |node|
+      ChefSpec::SoloRunner.new platform: 'centos', version: '7.7.1908' do |node|
         node.override['mapr']['hadoop']['config'] = {
           'core' => { 'property' => 'value' },
           'hdfs' => { 'property' => 'value' },

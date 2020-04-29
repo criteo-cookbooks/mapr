@@ -6,11 +6,11 @@
 require 'spec_helper'
 
 describe 'mapr::cldb' do
-  context 'When all attributes are default, on centos 7.4.1708' do
+  context 'When all attributes are default, on centos 7.7.1908' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.7.1908',
       ).converge(described_recipe)
     end
 
@@ -55,7 +55,7 @@ describe 'mapr::cldb' do
 
   context 'Secure mode (Not necessarily with Kerberos)' do
     let(:chef_run) do
-      ChefSpec::SoloRunner.new platform: 'centos', version: '7.4.1708' do |node|
+      ChefSpec::SoloRunner.new platform: 'centos', version: '7.7.1908' do |node|
         node.override['mapr']['cluster']['config']['security']['secure'] = true
       end.converge(described_recipe)
     end

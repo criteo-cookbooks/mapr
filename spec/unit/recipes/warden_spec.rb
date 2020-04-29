@@ -10,7 +10,7 @@ describe 'mapr::warden' do
     let(:chef_run) do
       runner = ChefSpec::SoloRunner.new(
         platform: 'centos',
-        version:  '7.4.1708',
+        version:  '7.7.1908',
       )
       runner.converge(described_recipe)
     end
