@@ -37,3 +37,12 @@ template File.join(node['mapr']['config']['config_dir'], 'daemon.conf') do
   mode '744'
   variables(config: node['mapr']['warden']['daemon']['config'])
 end
+
+# Replace the default systemd service unit to make it compatible with systemd-219-67
+template '/etc/systemd/system/mapr-warden.service' do
+  source 'systemd_warden.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  variables(user: node['mapr']['config']['owner'])
+end

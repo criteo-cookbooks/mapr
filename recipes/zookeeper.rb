@@ -55,6 +55,15 @@ template ::File.join(node['mapr']['zookeeper']['dir'], "zookeeper-#{node['mapr']
   variables(config: config.hash)
 end
 
+# Replace the default systemd service unit to make it compatible with systemd-219-67
+template '/etc/systemd/system/mapr-zookeeper.service' do
+  source 'systemd_zookeeper.erb'
+  owner 'root'
+  group 'root'
+  mode '0755'
+  variables(user: node['mapr']['config']['owner'])
+end
+
 service 'mapr-zookeeper' do
   action %w[start enable]
 end
