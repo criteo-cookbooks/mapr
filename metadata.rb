@@ -13,3 +13,4 @@ chef_version '>= 12.5' if respond_to?(:chef_version)
 
 depends 'java', '< 8'
 depends 'sysctl' # sysctl will be integrated as a chef resource in Chef 14. We still need it so far
+depends 'chef-vault'
